@@ -13,36 +13,50 @@ public class Player : MonoBehaviour
     private bool canWallSlide;
     public bool canDoubleJump;
     private bool facingRight = true;
-    [SerializeField]  private float jumpForce = 6;
-    // Start is called before the first frame update
+    [SerializeField] private float jumpForce = 6;
+
     [Header("Collision info")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask whatIsGround;
-                     private bool isGrounded;
+    private bool isGrounded;
 
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float wallCheckDistance;
-    // Update is called once per frame
+
+    [Header("Air Dash")]
+    [SerializeField] private float dashSpeed = 15f;
+    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashCooldown = 1f;
+    private bool isDashing;
+    private bool canDash = true;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             JumpButton();
-        } 
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isGrounded && canDash)
+        {
+            StartCoroutine(AirDash());
+        }
 
         FlipControler();
         AnimatorController();
         CollisionCheck();
-        if (isGrounded) {
+
+        if (isGrounded)
+        {
             canDoubleJump = true;
+            canDash = true; // Reset dash ability when grounded
         }
     }
 
@@ -50,36 +64,47 @@ public class Player : MonoBehaviour
     {
         movingInput = Input.GetAxis("Horizontal");
         if (rb.velocity.x < 0 && facingRight)
-        { Flip(); }
-        else if (rb.velocity.x > 0 && !facingRight) { Flip(); }
-
+        {
+            Flip();
+        }
+        else if (rb.velocity.x > 0 && !facingRight)
+        {
+            Flip();
+        }
     }
+
     private void JumpButton()
     {
-        if(isGrounded)
-        { Jump(); }
+        if (isGrounded)
+        {
+            Jump();
+        }
         else if (canDoubleJump)
         {
             canDoubleJump = false;
             Jump();
         }
     }
+
     private void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x,jumpForce);
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
-
 
     private void FixedUpdate()
     {
-
-        rb.velocity = new Vector2(movingInput * speed, rb.velocity.y);
+        if (!isDashing) // Only allow normal movement if not dashing
+        {
+            rb.velocity = new Vector2(movingInput * speed, rb.velocity.y);
+        }
     }
+
     private void Flip()
     {
-        transform.Rotate(0,180,0);
+        transform.Rotate(0, 180, 0);
         facingRight = !facingRight;
     }
+
     private void AnimatorController()
     {
         bool IsMoving = rb.velocity.x != 0;
@@ -87,9 +112,31 @@ public class Player : MonoBehaviour
         anim.SetBool("IsGrounded", isGrounded);
         anim.SetFloat("yVelocity", rb.velocity.y);
     }
-    private void CollisionCheck() {
+
+    private void CollisionCheck()
+    {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
+
+    private IEnumerator AirDash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0; // Disable gravity during dash
+
+        float dashDirection = facingRight ? 1 : -1;
+        rb.velocity = new Vector2(dashDirection * dashSpeed, 0);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.gravityScale = originalGravity; // Restore gravity
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true; // Allow dash again after cooldown
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
