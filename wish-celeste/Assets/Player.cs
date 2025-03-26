@@ -26,15 +26,19 @@ public class Player : MonoBehaviour
 
     [Header("Air Dash")]
     [SerializeField] private float dashSpeed = 15f;
-    [SerializeField] private float dashDuration = 0.2f;
+    [SerializeField] private float dashDuration = 0.5f;
     [SerializeField] private float dashCooldown = 1f;
     private bool isDashing;
     private bool canDash = true;
+
+    // respawn
+    private Vector3 respawnPoint;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        respawnPoint = transform.position;
     }
 
     void Update()
@@ -140,5 +144,20 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+
+    // respawn
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeathZone"))
+        {
+            Respawn();
+        }
+    }
+
+    private void Respawn()
+    {
+        transform.position = respawnPoint; 
     }
 }
