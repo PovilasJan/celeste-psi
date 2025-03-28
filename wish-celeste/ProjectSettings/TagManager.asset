@@ -45,9 +45,18 @@ TagManager:
   - name: Background
     uniqueID: 762641337
     locked: 0
+  - name: One way platform
+    uniqueID: 515181655
+    locked: 0
   - name: Ground
     uniqueID: 48908031
     locked: 0
+  - name: DeathTrap
+    uniqueID: 754136177
+    locked: 0
   - name: Player
     uniqueID: 2000031739
+    locked: 0
+  - name: UI
+    uniqueID: 3923437275
     locked: 0
