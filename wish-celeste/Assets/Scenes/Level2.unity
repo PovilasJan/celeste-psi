@@ -122,6 +122,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &359655999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 359656001}
+  - component: {fileID: 359656000}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &359656000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359655999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe64ac566fdff742935bf648e43028c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &359656001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359655999}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.0303037, y: -0.7244167, z: -9.945354}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434141762
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +438,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.24}
-  m_Size: {x: 1.56, y: 1.77}
+  m_Size: {x: 1.56, y: 1.45}
   m_Direction: 0
 --- !u!114 &833022418
 MonoBehaviour:
@@ -408,9 +452,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b2e39a2f78c9e4cb231b7d1ee1c274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   canDoubleJump: 0
-  jumpForce: 12
+  jumpForce: 13
   groundCheck: {fileID: 434141763}
   groundCheckRadius: 0.36
   whatIsGround:
@@ -25250,3 +25294,4 @@ SceneRoots:
   - {fileID: 833022415}
   - {fileID: 1841650046}
   - {fileID: 987423912}
+  - {fileID: 359656001}

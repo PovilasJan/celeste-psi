@@ -22034,9 +22034,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b2e39a2f78c9e4cb231b7d1ee1c274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   canDoubleJump: 0
-  jumpForce: 12
+  jumpForce: 13
   groundCheck: {fileID: 2144107246}
   groundCheckRadius: 0.36
   whatIsGround:
@@ -22080,7 +22080,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.24}
-  m_Size: {x: 1.56, y: 1.77}
+  m_Size: {x: 1.56, y: 1.45}
   m_Direction: 0
 --- !u!50 &1471678880
 Rigidbody2D:

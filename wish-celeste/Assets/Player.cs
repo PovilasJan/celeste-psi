@@ -7,13 +7,13 @@ public class Player : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
-    [SerializeField] float speed = 5;
+    [SerializeField] float speed = 7;
     private float movingInput;
 
     private bool canWallSlide;
     public bool canDoubleJump;
     private bool facingRight = true;
-    [SerializeField] private float jumpForce = 6;
+    [SerializeField] private float jumpForce = 13;
 
     [Header("Collision info")]
     [SerializeField] private Transform groundCheck;
@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
     [Header("Air Dash")]
     [SerializeField] private float dashSpeed = 15f;
     [SerializeField] private float dashDuration = 0.5f;
-    [SerializeField] private float dashCooldown = 1f;
     private bool isDashing;
     private bool canDash = true;
 
@@ -43,12 +42,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             JumpButton();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isGrounded && canDash)
+        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.DownArrow)) && !isGrounded && canDash)
         {
             StartCoroutine(AirDash());
         }
@@ -67,11 +66,11 @@ public class Player : MonoBehaviour
     private void FlipControler()
     {
         movingInput = Input.GetAxis("Horizontal");
-        if (rb.velocity.x < 0 && facingRight)
+        if(movingInput < 0 && facingRight)
         {
             Flip();
         }
-        else if (rb.velocity.x > 0 && !facingRight)
+        else if(movingInput > 0 && !facingRight)
         {
             Flip();
         }
@@ -79,11 +78,11 @@ public class Player : MonoBehaviour
 
     private void JumpButton()
     {
-        if (isGrounded)
+        if (isGrounded && isDashing == false)
         {
             Jump();
         }
-        else if (canDoubleJump)
+        else if (canDoubleJump && isDashing == false)
         {
             canDoubleJump = false;
             Jump();
@@ -124,21 +123,32 @@ public class Player : MonoBehaviour
 
     private IEnumerator AirDash()
     {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0; // Disable gravity during dash
+        if(canDash == true)
+        {
+            canDash = false;
+            isDashing = true;
+            float originalGravity = rb.gravityScale;
+            rb.gravityScale = 0; // Disable gravity during dash
 
-        float dashDirection = facingRight ? 1 : -1;
-        rb.velocity = new Vector2(dashDirection * dashSpeed, 0);
+            float dashDirection = facingRight ? 1 : -1;
+            rb.velocity = new Vector2(dashDirection * dashSpeed, 0);
 
-        yield return new WaitForSeconds(dashDuration);
+            //yield return new WaitForSeconds(dashDuration);
 
-        rb.gravityScale = originalGravity; // Restore gravity
-        isDashing = false;
+            float dashTimer = 0f;
+            while (dashTimer < dashDuration)
+            {
+                dashTimer += Time.deltaTime;
 
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true; // Allow dash again after cooldown
+                if (!isDashing)
+                    break;
+
+                yield return null;
+            }
+
+            rb.gravityScale = originalGravity; // Restore gravity
+            isDashing = false;
+        }
     }
 
     private void OnDrawGizmos()
@@ -146,13 +156,22 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
     }
 
-
-    // respawn
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DeathZone"))
         {
             Respawn();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isDashing)
+        {
+            isDashing = false;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 1;
+            StopCoroutine(AirDash());
         }
     }
 
