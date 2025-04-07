@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
     private bool isDashing;
     private bool canDash = true;
 
+    private GameObject[] doubleJumpOrbs;
+    private GameObject[] dashOrbs;
+
     // respawn
     private Vector3 respawnPoint;
 
@@ -38,6 +41,9 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         respawnPoint = transform.position;
+
+        doubleJumpOrbs = GameObject.FindGameObjectsWithTag("DoubleJumpReset");
+        dashOrbs = GameObject.FindGameObjectsWithTag("DashReset");
     }
 
     void Update()
@@ -162,6 +168,18 @@ public class Player : MonoBehaviour
         {
             Respawn();
         }
+
+        else if (collision.CompareTag("DoubleJumpReset"))
+        {
+            canDoubleJump = true;
+            collision.gameObject.SetActive(false);
+        }
+
+        else if (collision.CompareTag("DashReset"))
+        {
+            canDash = true;
+            collision.gameObject.SetActive(false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -177,6 +195,18 @@ public class Player : MonoBehaviour
 
     private void Respawn()
     {
-        transform.position = respawnPoint; 
+        transform.position = respawnPoint;
+
+        foreach (GameObject orb in doubleJumpOrbs)
+        {
+            if (orb != null)
+                orb.SetActive(true);
+        }
+
+        foreach (GameObject orb in dashOrbs)
+        {
+            if (orb != null)
+                orb.SetActive(true);
+        }
     }
 }

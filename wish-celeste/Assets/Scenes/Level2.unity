@@ -464,7 +464,6 @@ MonoBehaviour:
   wallCheckDistance: 0
   dashSpeed: 15
   dashDuration: 0.2
-  dashCooldown: 1
 --- !u!95 &833022419
 Animator:
   serializedVersion: 5
@@ -1937,11 +1936,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5339405728642767053, guid: 30e87d394613e384abeb4785fe7e58c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.09
+      value: 8.44
       objectReference: {fileID: 0}
     - target: {fileID: 5339405728642767053, guid: 30e87d394613e384abeb4785fe7e58c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 5339405728642767053, guid: 30e87d394613e384abeb4785fe7e58c7, type: 3}
       propertyPath: m_LocalPosition.z
