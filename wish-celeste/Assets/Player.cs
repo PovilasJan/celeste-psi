@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private GameObject[] doubleJumpOrbs;
     private GameObject[] dashOrbs;
 
+
     // respawn
     private Vector3 respawnPoint;
 
