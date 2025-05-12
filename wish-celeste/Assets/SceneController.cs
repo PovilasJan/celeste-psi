@@ -19,12 +19,25 @@ public class SceneController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        LoadScene("Main menu");
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
     }
     public void NextLevel()
     {
 
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 
     IEnumerator LoadScene(string sceneName)
     {
