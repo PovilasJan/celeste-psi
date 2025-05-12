@@ -37,7 +37,7 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
+    
 
     IEnumerator LoadScene(string sceneName)
     {
