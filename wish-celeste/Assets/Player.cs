@@ -126,7 +126,9 @@ public class Player : MonoBehaviour
     private void CollisionCheck()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-    }
+        Debug.Log("IsGrounded: " + isGrounded);
+
+}
 
     private IEnumerator AirDash()
     {
@@ -181,6 +183,12 @@ public class Player : MonoBehaviour
             canDash = true;
             collision.gameObject.SetActive(false);
         }
+
+        else if (collision.CompareTag("Coin"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+    
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -210,4 +218,5 @@ public class Player : MonoBehaviour
                 orb.SetActive(true);
         }
     }
+
 }
