@@ -33,5 +33,49 @@ Sukurtas air-dash reset orb ir jump reset orb
 Sukurtas mirties efektas
 
 Architektūra
+
+```mermaid
+graph TD
+    GM[GameManager]
+    Player[Player]
+    World[World]
+    Mechanics[Mechanics]
+    UI[UI System]
+    Audio[Audio System]
+    Menu[StartGame/Menu]
+    Finish[FinishPoint]
+
+    GM -->|Controls| Player
+    GM --> UI
+    GM --> Audio
+
+    Player -->|Interacts| World
+    Player --> Mechanics
+    Player --> UI
+    Player --> Audio
+    Player --> Finish
+
+    World --> Coins
+    World --> DoubleJumpResetOrbs
+    World --> DashResetOrbs
+    World --> DeathZones
+    World --> Finish
+
+    Menu -->|Loads| GM
+
+    UI -.-> Player
+    UI -.-> World
+```
+
+**Komponentų pastabos:**
+
+- **GameManager (Žaidimo valdytojas):** Valdo žaidimo būseną ir scenų perjungimą.
+- **Player (Žaidėjas):** Pagrindinė logika judėjimui, mechanikoms, atsiradimui iš naujo ir sąveikai su pasaulio objektais.
+- **World (Pasaulis):** Tilemap'ai ir interaktyvūs žaidimo objektai (monetos, atstatymo orbai, mirties zonos, finišas).
+- **Mechanics (Mechanikos):** Šuolio, dvigubo šuolio, oro šuolio bei atstatymo logika (įgyvendinta Player skripte).
+- **UI System (Vartotojo sąsajos sistema):** Sukurta naudojant Unity UI/TextMesh Pro, rodo žaidimo HUD, meniu, kt.
+- **Audio System (Garso sistema):** Valdo muziką ir garso efektus.
+- **StartGame/Menu (Pagrindinis meniu):** Pagrindinis meniu ir žaidimo pradžios logika.
+- **FinishPoint (Finišo taškas):** Aptinka, kai žaidėjas pasiekia lygio pabaigą ir inicijuoja progresą.
+
 ---
-Paleidus žaidimą yra sukuriami tokie objektai kaip žaidėjas, pasaulis, fono muzika. . 
