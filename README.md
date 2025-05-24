@@ -66,6 +66,16 @@ graph TD
     UI -.-> Player
     UI -.-> World
 ```
+**pastabos:**
+
+- **GameManager (Žaidimo valdytojas):** Valdo žaidimo būseną ir scenų perjungimą.
+- **Player (Žaidėjas):** Pagrindinė logika judėjimui, mechanikoms, atsiradimui iš naujo ir sąveikai su pasaulio objektais.
+- **World (Pasaulis):** Tilemap'ai ir interaktyvūs žaidimo objektai (monetos, atstatymo orbai, mirties zonos, finišas).
+- **Mechanics (Mechanikos):** Šuolio, dvigubo šuolio, oro šuolio bei atstatymo logika (įgyvendinta Player skripte).
+- **UI System (Vartotojo sąsajos sistema):** Sukurta naudojant Unity UI/TextMesh Pro, rodo žaidimo HUD, meniu, kt.
+- **Audio System (Garso sistema):** Valdo muziką ir garso efektus.
+- **StartGame/Menu (Pagrindinis meniu):** Pagrindinis meniu ir žaidimo pradžios logika.
+- **FinishPoint (Finišo taškas):** Aptinka, kai žaidėjas pasiekia lygio pabaigą ir inicijuoja progresą.
 
 **backlog**
 ---
@@ -82,16 +92,6 @@ sprint 4
 ![image](https://github.com/user-attachments/assets/ce885be0-ced5-40ae-9a1e-46ad1053b0e6)
 
 
-**pastabos:**
-
-- **GameManager (Žaidimo valdytojas):** Valdo žaidimo būseną ir scenų perjungimą.
-- **Player (Žaidėjas):** Pagrindinė logika judėjimui, mechanikoms, atsiradimui iš naujo ir sąveikai su pasaulio objektais.
-- **World (Pasaulis):** Tilemap'ai ir interaktyvūs žaidimo objektai (monetos, atstatymo orbai, mirties zonos, finišas).
-- **Mechanics (Mechanikos):** Šuolio, dvigubo šuolio, oro šuolio bei atstatymo logika (įgyvendinta Player skripte).
-- **UI System (Vartotojo sąsajos sistema):** Sukurta naudojant Unity UI/TextMesh Pro, rodo žaidimo HUD, meniu, kt.
-- **Audio System (Garso sistema):** Valdo muziką ir garso efektus.
-- **StartGame/Menu (Pagrindinis meniu):** Pagrindinis meniu ir žaidimo pradžios logika.
-- **FinishPoint (Finišo taškas):** Aptinka, kai žaidėjas pasiekia lygio pabaigą ir inicijuoja progresą.
 
 ---
 **Testavimas:**
