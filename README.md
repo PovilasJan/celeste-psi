@@ -67,7 +67,22 @@ graph TD
     UI -.-> World
 ```
 
-**Komponentų pastabos:**
+**backlog**
+---
+sprint 1
+![image](https://github.com/user-attachments/assets/c13e6212-f920-437c-9f80-327291b846bb)
+
+sprint 2
+![image](https://github.com/user-attachments/assets/f95f34b5-0330-41b8-8012-cc1fc7c8d209)
+
+sprint 3
+![image](https://github.com/user-attachments/assets/1e834062-fc6a-42bb-9f42-4749603b2571)
+
+sprint 4
+![image](https://github.com/user-attachments/assets/ce885be0-ced5-40ae-9a1e-46ad1053b0e6)
+
+
+**pastabos:**
 
 - **GameManager (Žaidimo valdytojas):** Valdo žaidimo būseną ir scenų perjungimą.
 - **Player (Žaidėjas):** Pagrindinė logika judėjimui, mechanikoms, atsiradimui iš naujo ir sąveikai su pasaulio objektais.
@@ -79,3 +94,5 @@ graph TD
 - **FinishPoint (Finišo taškas):** Aptinka, kai žaidėjas pasiekia lygio pabaigą ir inicijuoja progresą.
 
 ---
+**Testavimas:**
+![image](https://github.com/user-attachments/assets/099f0120-6200-4034-b5dc-b12101a1e904)
